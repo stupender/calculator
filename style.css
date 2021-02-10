@@ -144,6 +144,12 @@ button.operand:focus {
     background: radial-gradient(#0d0d0e, #171719);
 }
 
+.selected {
+    border: 1px solid #b8c3f275;
+    border-radius: 50px;
+    background: radial-gradient(#0d0d0e, #171719);
+}
+
 button:active {
     border: 1px solid #b8c3f275;
     border-radius: 50px;

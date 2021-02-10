@@ -4,31 +4,34 @@
 // 3. When second number is entered, and user hits enter or “=“, run operate function on (operator, firstNum, secondNum)
 // 4. Round answer to two decimal points.
 
+// TO-DO:
+// ADD CLASS OF SELECTED WHEN OOPERATOR ISN'T NULL
+// ADD CLASS OF SELECTED WHEN KEY PRESSES DOWN
+// When you hit enter with just one operator it still operates...
+// GET A CHAIN OF OPERATORS TO WORK: 1 + 1 - 2 + 6 
 
-// VARIABLES TO HOLD SCREEN VALUE
-let numberButtons = document.querySelectorAll('.number');
-let pointButton = document.querySelector('.decimal');
-let operatorButtons = document.querySelectorAll('.operand');
-let equalsButton = document.querySelector('.equal');
-let clearButton = document.querySelector('button.clear');
-let screen = document.querySelector('#screen');
-// let deleteButton = document.querySelector('.backspace');
+// Figure out how to clear the solution if you start typing a new number,
+// rather than just adding that number to the solution's string...
+
+// Stop appendNumber after 17 characters
+
+// VARIABLES TO HOLD BUTTONS & SCREEN VALUE
+let numberButtons = document.querySelectorAll(".number");
+let pointButton = document.querySelector(".decimal");
+let operatorButtons = document.querySelectorAll(".operand");
+let equalsButton = document.querySelector(".equal");
+let clearButton = document.querySelector("button.clear");
+let screen = document.querySelector("#screen");
 
 let firstOperand = "";
 let secondOperand = "";
 let currentOperation = null;
-let shouldResetScreen = false;
-let clearForSecondOperand = false;
-let solutionIsViewing = false;
-// Figure out how to clear the solution if you start typing a new number,
-// rather than just adding that number to the solution's string...
-
+let blankForNext = false;
 
 // EVENT LISTENERS
-window.addEventListener("keydown", setInput);
+window.addEventListener("keydown", keyInput);
 equalsButton.addEventListener("click", evaluate);
-clearButton.addEventListener("click", clear);
-// deleteButton.addEventListener("click", deleteNumber);
+clearButton.addEventListener("click", clearToZero);
 pointButton.addEventListener("click", appendPoint);
 
 numberButtons.forEach((button) =>
@@ -39,46 +42,53 @@ operatorButtons.forEach((button) =>
   button.addEventListener("click", () => setOperation(button.textContent))
 );
 
-// KEYBOARD INPUT FUNCTIONS 
-function setInput(e) {
+// KEYBOARD INPUT FUNCTIONS
+function keyInput(e) {
   if (e.key >= 0 && e.key <= 9) appendNumber(e.key);
   if (e.key === ".") appendPoint();
   if (e.key === "=" || e.key === "Enter") evaluate();
   if (e.key === "Backspace") deleteNumber();
-  if (e.key === "Escape") clear();
+  if (e.key === "Escape") clearToZero();
   if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/")
     setOperation(convertOperator(e.key));
 }
 
-function convertOperator(keyboardOperator) {
-  if (keyboardOperator === "/") return "÷";
-  if (keyboardOperator === "*") return "*";
-  if (keyboardOperator === "-") return "−";
-  if (keyboardOperator === "+") return "+";
+function convertOperator(keyOperator) {
+  if (keyOperator === "/") return "÷";
+  else if (keyOperator === "*") return "*";
+  else if (keyOperator === "-") return "−";
+  else if (keyOperator === "+") return "+";
 }
 
+
+
 // SCREEN DISPLAY FUNCTIONS
+
+// IF SCREEN DISPLAYS ZERO, OR FIRST NUMBER AFTER OPERATOR IS SELECTED, RESET SCREEN FOR NEW NUMBER.
 function appendNumber(number) {
-  if (screen.textContent === "0" || shouldResetScreen) resetScreen();
+  if (screen.textContent === "0" || blankForNext) blankScreen();
+  else if (screen.textContent.length === 17) return;
   screen.textContent += number;
 }
 
-function resetScreen() {
-  screen.textContent = "";
-  shouldResetScreen = false;
-}
-
-function clear() {
+// CLEARS SCREEN TO DISPLAY ZERO VALUE
+function clearToZero() {
   screen.textContent = "0";
   firstOperand = "";
   secondOperand = "";
   currentOperation = null;
 }
 
+// CLEARS SCREEN ENTIRELY, NO CHARACTERS
+function blankScreen() {
+  screen.textContent = "";
+  blankForNext = false;
+}
+
 function appendPoint() {
-  if (shouldResetScreen) resetScreen();
-  if (screen.textContent === "") screen.textContent = "0";
-  if (screen.textContent.includes(".")) return;
+  if (blankForNext) blankScreen();
+  else if (screen.textContent === "") screen.textContent = "0";
+  else if (screen.textContent.includes(".")) return;
   screen.textContent += ".";
 }
 
@@ -91,14 +101,14 @@ function setOperation(operator) {
   if (currentOperation !== null) evaluate();
   firstOperand = screen.textContent;
   currentOperation = operator;
-  shouldResetScreen = true;
+  blankForNext = true;
 }
 
 function evaluate() {
-  if (currentOperation === null || shouldResetScreen) return;
-  if (currentOperation === "÷" && screen.textContent === "0") {
+  if (currentOperation === null || blankForNext) return;
+  else if (currentOperation === "÷" && screen.textContent === "0") {
     alert("A number cannot be divided by 0");
-    clear();
+    clearToZero();
     return;
   }
   secondOperand = screen.textContent;
@@ -106,43 +116,42 @@ function evaluate() {
     operate(currentOperation, firstOperand, secondOperand)
   );
   currentOperation = null;
-  // solutionIsViewing = true;
 }
 
 function roundResult(number) {
   return Math.round(number * 10) / 10;
 }
 
-function add(a, b) {
-  return a + b;
-}
-
-function substract(a, b) {
-  return a - b;
-}
-
-function multiply(a, b) {
-  return a * b;
-}
-
-function divide(a, b) {
-  return a / b;
-}
-
 function operate(operator, a, b) {
-  a = Number(a);
-  b = Number(b);
+  a = parseInt(a);
+  b = parseInt(b);
   switch (operator) {
     case "+":
-      return add(a, b);
+      return a + b;
     case "−":
-      return substract(a, b);
+      return a - b;
     case "*":
-      return multiply(a, b);
+      return a * b;
     case "÷":
       if (b === 0) return null;
-      else return divide(a, b);
+      return a / b;
     default:
       return null;
   }
 }
+
+// function add(a, b) {
+//   return a + b;
+// }
+
+// function subtract(a, b) {
+//   return a - b;
+// }
+
+// function multiply(a, b) {
+//   return a * b;
+// }
+
+// function divide(a, b) {
+//   return a / b;
+// }
