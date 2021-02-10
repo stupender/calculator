@@ -138,7 +138,7 @@ button:focus {
     outline: none;
 }
 
-button.operand:focus {
+button.operator:focus {
     border: 1px solid #b8c3f275;
     border-radius: 50px;
     background: radial-gradient(#0d0d0e, #171719);
