@@ -5,19 +5,23 @@ let operatorButtons = document.querySelectorAll('.operand');
 let equalsButton = document.querySelector('.equal');
 let clearButton = document.querySelector('button.clear');
 let screen = document.querySelector('#screen');
-let deleteButton = document.querySelector('.backspace');
-
+// let deleteButton = document.querySelector('.backspace');
 
 let firstOperand = "";
 let secondOperand = "";
 let currentOperation = null;
 let shouldResetScreen = false;
+let clearForSecondNum = false;
+let solutionIsViewing = false;
+// Figure out how to clear the solution if you start typing a new number,
+// rather than just adding that number to the solution's string...
 
 
+// EVENT LISTENERS
 window.addEventListener("keydown", setInput);
 equalsButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clear);
-deleteButton.addEventListener("click", deleteNumber);
+// deleteButton.addEventListener("click", deleteNumber);
 pointButton.addEventListener("click", appendPoint);
 
 numberButtons.forEach((button) =>
@@ -28,6 +32,7 @@ operatorButtons.forEach((button) =>
   button.addEventListener("click", () => setOperation(button.textContent))
 );
 
+// SCREEN DISPLAY FUNCTIONS
 function appendNumber(number) {
   if (screen.textContent === "0" || shouldResetScreen) resetScreen();
   screen.textContent += number;
@@ -76,6 +81,7 @@ function evaluate() {
     operate(currentOperation, firstOperand, secondOperand)
   );
   currentOperation = null;
+  solutionIsViewing = true;
 }
 
 function roundResult(number) {
