@@ -39,6 +39,7 @@ body {
     font-size: 2em;
     text-align: center;
     width: 490px;
+    height: 35px;
     padding-top: 35px;
     padding-bottom: 35px;
     /* margin-bottom: 35px; */
@@ -132,40 +133,37 @@ button {
     display: block;
     margin: 5px 5px 5px 5px;
 }
+
 button:focus {
     outline: none;
 }
+
+button.operand:focus {
+    border: 1px solid #b8c3f275;
+    border-radius: 50px;
+    background: radial-gradient(#0d0d0e, #171719);
+}
+
 button:active {
     border: 1px solid #b8c3f275;
     border-radius: 50px;
     background: radial-gradient(#0d0d0e, #171719);
-
 }
-/* p {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.25em;
-    color: hsl(36deg 53% 55%);
-    border-radius: 50%;
-    padding: auto;
-    margin: auto;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    display: block;
-    margin: 5px 5px 5px 5px;
-} */
 
 .multiply {
     line-height: 68px;
 }
 
 .clear {
-    font-size: 1.05em;
+    font-size: 0.9em;
+}
+.backspace { 
+    font-size: 0.9em;
 }
 
 p#signoff {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
+    font-size: 0.9em;
     color: #0d0d0e;
     width: 100%;
     text-align: center;
@@ -180,7 +178,7 @@ p#signoff {
 }
 
 #links:hover {
-    color: white;
-    border-bottom: 1px solid white;
+    color: #d8def5;
+    border-bottom: 1px solid #d8def5;
 
 }

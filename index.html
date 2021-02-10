@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Calculator App</title>
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Orbitron&display=swap" rel="stylesheet">    
@@ -13,38 +13,40 @@
     <body>
         <div id='vertical-center'>
             <div id='flex-container'>
-                <div id='screen'>2 + 2 = 5</div>
+                <div id='screen'>0</div>
                 <div id='container'>
                     <div class='buttons-left'>
                         <div class='button-holder-left'>
-                            <button class='button 7'>7</button>
-                            <button class='button 8'>8</button>
-                            <button class='button 9'>9</button>
-                            <button class='button 4'>4</button>
-                            <button class='button 5'>5</button>
-                            <button class='button 6'>6</button>
-                            <button class='button 1'>3</button>
-                            <button class='button 2'>2</button>
-                            <button class='button 3'>1</button>
-                            <button class='button double-width 0'>0</button>
-                            <button class='button decimal'>.</button>    
+                            <button class='number' data-key="55">7</button>
+                            <button class='number' data-key="56">8</button>
+                            <button class='number' data-key="57">9</button>
+                            <button class='number' data-key="52">4</button>
+                            <button class='number' data-key="53">5</button>
+                            <button class='number' data-key="54">6</button>
+                            <button class='number' data-key="49">1</button>
+                            <button class='number' data-key="50">2</button>
+                            <button class='number' data-key="51">3</button>
+                            <button class='number double-width' data-key="48">0</button>
+                            <button class='button decimal' data-key="190">.</button>    
                         </div>
                     </div>
                     <div class='buttons-right'>
                         <div class='button-holder-right'>
-                            <button class='button double-width clear'>CLEAR</button>
-                            <button class='button multiply'>*</button>
-                            <button class='button divide'>÷</button>
-                            <button class='button add'>+</button>
-                            <button class='button subtract'>-</button>
-                            <button class='button double-width equals'>=</button>
+                            <button class='button clear' data-key="8">CLEAR</button>
+                            <button class='button backspace' data-key="8">DEL</button>
+
+                            <button class='button operand multiply' data-key="56">*</button>
+                            <button class='button operand divide' data-key="191">÷</button>
+                            <button class='button operand add' data-key="187">+</button>
+                            <button class='button operand subtract' data-key="189">-</button>
+                            <button class='button double-width equal' data-key="13">=</button>
                         </div>
                     </div>
                 </div>
                 <p id='signoff'>
                     <!-- </br> -->
-                    Inspired by the design of a <a href="https://alexanderw.artstation.com/projects/KayREB" id='links' target="_blank" rel="noopener noreferrer">Vintage Russian Calculator</a>.</br>
-                    Built by Stu Pender for <a href="https://theodinproject.com" id='links' target="_blank" rel="noopener noreferrer">The Odin Project's</a> curriculum. 
+                    Inspired by the design of a <a href="https://alexanderw.artstation.com/projects/KayREB" id='links' target="_blank" rel="noopener noreferrer">vintage Russian calculator</a>.</br>
+                    Built by Stu Pender for <a href="https://theodinproject.com" id='links' target="_blank" rel="noopener noreferrer">The Odin Project</a> curriculum. 
                 </p>    
             </div>
         </div>
