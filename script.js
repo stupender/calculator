@@ -10,7 +10,6 @@ let firstOperand = "";
 let secondOperand = "";
 let currentSetOperator = null;
 let blankForNext = false;
-
 let solutionViewing = false;
 
 
