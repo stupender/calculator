@@ -27,7 +27,7 @@ equalsButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clearToZero);
 
 
-// GETTING SELECTED COLOR RINGS TO WORK WITH KEYBOARD 
+// EVENT LISTENERS TO TURN ON/OFF '.SELECTED' CLASS WHEN KEYBOARD SELECTS BUTTON
 
 window.addEventListener("keydown", function(e) {
   let selectedButton = document.querySelector(`button[data-key="${e.keyCode}"]`)
