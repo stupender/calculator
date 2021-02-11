@@ -48,7 +48,6 @@ input.addEventListener('keydown', e => {
   if(e.shiftKey)
     if(e.which == 56){
       console.log(this);
-      // will only return the value of dollar sign ($) not a number 4
     }
 })
 
