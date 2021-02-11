@@ -27,6 +27,31 @@ equalsButton.addEventListener("click", evaluate);
 clearButton.addEventListener("click", clearToZero);
 
 
+// GETTING SELECTED COLOR RINGS TO WORK WITH KEYBOARD 
+
+window.addEventListener("keydown", function(e) {
+  let selectedButton = document.querySelector(`button[data-key="${e.keyCode}"]`)
+  if (!selectedButton) return;
+  console.log(selectedButton);
+  selectedButton.classList.add("selected");
+});
+
+window.addEventListener("keyup", function(e) {
+  let selectedButton = document.querySelector(`button[data-key="${e.keyCode}"]`)
+  if (!selectedButton) return;
+  console.log(selectedButton);
+  selectedButton.classList.remove("selected");
+});
+
+
+input.addEventListener('keydown', e => {
+  if(e.shiftKey)
+    if(e.which == 56){
+      console.log(this);
+      // will only return the value of dollar sign ($) not a number 4
+    }
+})
+
 
 // KEYBOARD INPUT FUNCTIONS . . .
 function keyInput(e) {
@@ -114,7 +139,7 @@ function evaluate() {
 }
 
 function roundNumber(number) {
-  return Math.round(number * 100) / 100;
+  return Math.round(number * 10000) / 10000;
 }
 
 function operate(operator, a, b) {
@@ -141,3 +166,5 @@ function operate(operator, a, b) {
 // ADD CLASS OF SELECTED WHEN KEY PRESSES DOWN
 // When you hit enter with just one operand it still operates...
 
+
+// Sometimes enter key repeats the second operand .. that's usually what breaks it.
